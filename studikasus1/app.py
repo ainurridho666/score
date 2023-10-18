@@ -9,8 +9,6 @@ app = Flask(__name__) #mengatur nama aplikasi
 db = SQL ("sqlite:///score.db")
 
 
-
-
 @app.route("/", methods=["GET", "POST"])
 #ketika route "/" dipanggil/diakses, maka fungsi inde() dieksekusi
 def score():
@@ -39,3 +37,14 @@ def score():
         return render_template("index.html", students = score) 
 
 
+
+@app.route("/edit/<id>", methods=["GET", "POST"])
+def edit_data(id):
+    if request.method == "GET":
+        edt = db.execute("SELECT * FROM score WHERE id = ?", id)[0]
+        return render_template("edit.html", edt = edt)
+    else:
+        edt_text = request.form.get("text")
+        edt_score = request.form.get("score")
+        db.execute('update score set text = ?, score = ? where id = ?', edt_text, edt_score, id)
+        return redirect("/") 
