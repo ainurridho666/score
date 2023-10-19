@@ -28,6 +28,7 @@
                     <th>text</th>
                     <th>Score</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
 
@@ -38,6 +39,10 @@
                     <td>{{x.score}}</td>
                     <td>
                         <a href="/edit/{{x['id']}}">Edit</a>
+                    </td>
+                    <td>
+                        <a href="/delete/{{x['id']}}"
+                        onclick="return confrim('Apakah anda yakin ingin menghapus?');">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
