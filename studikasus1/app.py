@@ -111,4 +111,12 @@ def login():
         return redirect("/")
 
     else:
-        return render_template("login.html")    
+        return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    """log user out"""
+
+    session.clear()
+
+    return redirect("/")            
